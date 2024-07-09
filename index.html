@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <div class="header d-flex align-items-center justify-content-center text-center">
+<body class="position-relative">
+    <div class="header d-flex align-items-center justify-content-center text-center py-5">
         <div class="w-50 mx-auto">
             <h1 class="mx-auto">BooKmarker</h1>
         </div>
@@ -31,7 +31,7 @@
         <label for="Site URL" class="fs-4 fw-bold ">
             <i class="fa-solid fa-link pe-2"></i>
             Site URL</label>
-        <input onkeyup="Validate(this,/^(http)(s)?\/\/:\w{5,}\.[a-z]{2,3}$/i)" type="text" id="Site URL" class="form-control my-3 check" placeholder="Site URL">
+        <input onkeyup="Validate(this,/^(https:\/\/)?(w{3}\.)?\w{5,}\.[a-z]{2,3}$/i)" type="text" id="Site URL" class="form-control my-3 check" placeholder="Site URL">
         <button onclick="addBook()" class="btn btn-outline-danger w-100" >Submit</button>
     
     </div>
@@ -52,6 +52,29 @@
         </tbody>
     </table>
     </div>
+<div class="box d-flex justify-content-center align-items-center d-none position-absolute start-0 top-0 w-100 h-100">
+    
+    <div class="message bg-white p-4 ">
+        <div class="header d-flex justify-content-between pb-3">
+            <div class="logo w-25 d-flex justify-content-evenly">
+            <span></span>
+            <span></span>
+            <span></span>
+            </div>
+
+            <button onclick="exit()"><i class="fa-solid fa-xmark close fs-3"></i></button>
+
+        </div>
+        <h3>Site Name or Url is not valid, Please follow the rules below :</h3>
+        <ol>
+            <li><i class="fa-regular fa-circle-right p-2"></i>
+                Site name must contain at least 3 characters
+            </li>
+            <li><i class="fa-regular fa-circle-right p-2"></i>
+                Site URL must be a valid one</li>
+        </ol>
+    </div>
+</div>
 
 
 <script src="js/script.js"></script>
