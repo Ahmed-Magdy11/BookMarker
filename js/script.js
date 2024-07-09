@@ -1,7 +1,7 @@
 
 BookNameInput=document.getElementById("Site Name");
 URLInput=document.getElementById("Site URL");
-var regexOfUrl=/^(http)(s)?\/\/:\w{5,}\.[a-z]{2,3}$/i;
+var regexOfUrl=/^(https:\/\/)?(w{3}\.)?\w{5,}\.[a-z]{2,3}$/i;
 var regexOfName=/^[A-Z][a-zA-Z]{3,}/g;
 
 var bookContainer ;
@@ -25,11 +25,13 @@ function addBook(){
             };
             bookContainer.push(book);
             localStorage.setItem("Books",JSON.stringify(bookContainer));
-            clear();
             // console.log(bookContainer);
             display(bookContainer);
-            URLInput.classList.remove("is-valid");
-            BookNameInput.classList.remove("is-valid");
+            clear();
+          
+    }
+    else{
+        message();
     }
 
 }
@@ -40,7 +42,13 @@ function addBook(){
 
 function clear(){
     BookNameInput.value="";
-    URLInput.value=""
+    URLInput.value="";
+    URLInput.classList.remove("is-valid");
+    BookNameInput.classList.remove("is-valid");
+
+    exit();
+
+    
 }
 
 
@@ -68,7 +76,6 @@ function deleteBook(i){
 bookContainer.splice(i,1);
 localStorage.setItem("Books",JSON.stringify(bookContainer));
 display(bookContainer);
-
 }
 
 
@@ -94,7 +101,29 @@ else{
 
 
 function Visit_URL(x){
-document.getElementById("visitBtn").addEventListener("click",function(){
-window.open(bookContainer[x].BookURL,"_blanck")
-});
+    if(/(w{3}\.)?\w{5,}\.[a-z]{2,3}$/i.test(bookContainer[x].BookURL)){
+
+        window.open("https://"+bookContainer[x].BookURL,"_blanck");
+
+    }
+    else{
+
+        window.open(bookContainer[x].BookURL,"_blanck");
+    }
+}
+
+
+function message(){
+    document.querySelector(".box").classList.add("d-block");
+    document.querySelector(".box").classList.remove("d-none");
+    document.body.style.opacity=0.7;
+    document.querySelector(".box").style.opacity=1;
+    
+
+}
+
+function exit(){
+    document.querySelector(".box").classList.add("d-none");
+    document.querySelector(".box").classList.remove("d-block");
+    document.body.style.opacity=1;
 }
